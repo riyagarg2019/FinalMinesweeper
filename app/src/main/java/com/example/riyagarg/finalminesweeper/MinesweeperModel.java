@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.example.riyagarg.finalminesweeper.view.Cell;
 import com.example.riyagarg.finalminesweeper.util.Generate;
+import com.example.riyagarg.finalminesweeper.view.MinesweeperView;
 
 import java.util.Random;
 
@@ -50,10 +51,10 @@ public class MinesweeperModel {
         for( int x = 0 ; x < WIDTH ; x++ ){
             for( int y = 0 ; y < HEIGHT ; y++ ){
                 if( MinesweeperGrid[x][y] == null ){
-                    MinesweeperGrid[x][y] = new Cell( context , x,y);
+                    MinesweeperGrid[x][y] = new Cell(x,y);
                 }
                 MinesweeperGrid[x][y].setValue(grid[x][y]);
-                MinesweeperGrid[x][y].invalidate();
+                MinesweeperGrid[x][y].Refresh();
             }
         }
     }
@@ -115,7 +116,7 @@ public class MinesweeperModel {
     public void flag( int x , int y ){
         boolean isFlagged = getCellAt(x,y).isFlagged();
         getCellAt(x,y).setFlagged(!isFlagged);
-        getCellAt(x,y).invalidate();
+        getCellAt(x,y).Refresh();
     }
 
     private void onGameLost(){

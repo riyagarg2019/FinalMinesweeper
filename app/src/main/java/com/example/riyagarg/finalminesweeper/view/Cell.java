@@ -10,8 +10,133 @@ import android.view.View;
 import com.example.riyagarg.finalminesweeper.R;
 import com.example.riyagarg.finalminesweeper.MinesweeperModel;
 
+import static java.security.AccessController.getContext;
 
-public class Cell extends View implements View.OnClickListener , View.OnLongClickListener{
+
+public class Cell {
+    private boolean isBomb;
+    private boolean isRevealed;
+    private boolean isClicked;
+    private boolean isFlagged;
+
+    private int x , y;
+    private int position;
+    private int value;
+
+    private MinesweeperView view;
+
+    /*public MinesweeperView(Context context){
+        super(context);
+
+        MinesweeperModel.getInstance().createGrid(context);
+        //GridAdapter gridadap = new GridAdapter();
+    }*/
+
+
+    /*public Cell(Context context , int x , int y ){
+        //super(context);
+
+        this.x = x;
+        this.y = y;
+
+        MinesweeperModel.getInstance().createGrid(context);
+        this.view = new MinesweeperView(context);
+
+
+    }*/
+
+    public Cell(int x, int y){
+        //super(context);
+
+        //this.x = x;
+        //this.y = y;
+        setPosition(x,y);
+        //MinesweeperModel.getInstance().createGrid(context);
+        //this.view = new MinesweeperView(context);
+
+
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        isBomb = false;
+        isRevealed = false;
+        isClicked = false;
+        isFlagged = false;
+
+        if( value == -1 ){
+            isBomb = true;
+        }
+
+        this.value = value;
+    }
+
+    public boolean isBomb() {
+        return isBomb;
+    }
+
+    public void setBomb(boolean bomb) {
+        isBomb = bomb;
+    }
+
+    public boolean isRevealed() {
+        return isRevealed;
+    }
+
+    public void setRevealed() {
+        isRevealed = true;
+        //invalidate();
+        view.refresh();
+    }
+
+    public boolean isClicked() {
+        return isClicked;
+    }
+
+    public void setClicked() {
+        this.isClicked = true;
+        this.isRevealed = true;
+        view.refresh();
+        //invalidate();
+    }
+
+    public boolean isFlagged() {
+        return isFlagged;
+    }
+
+    public void setFlagged(boolean flagged) {
+        isFlagged = flagged;
+    }
+
+    public int getXPos() {
+        return x;
+    }
+
+    public int getYPos() {
+        return y;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition( int x , int y ){
+        this.x = x;
+        this.y = y;
+
+        this.position = y * MinesweeperModel.WIDTH + x;
+
+        //invalidate();
+        view.refresh();
+    }
+    public void Refresh(){
+        view.refresh();
+    }
+}
+/*public class Cell extends View implements View.OnClickListener , View.OnLongClickListener{
 
     MinesweeperView view = new MinesweeperView(getContext());
 
@@ -112,4 +237,4 @@ public class Cell extends View implements View.OnClickListener , View.OnLongClic
     }
 
 
-}
+}*/
