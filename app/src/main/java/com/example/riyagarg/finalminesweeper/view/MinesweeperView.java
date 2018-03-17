@@ -22,6 +22,7 @@ import com.example.riyagarg.finalminesweeper.view.Cell;
 public class MinesweeperView extends View implements View.OnClickListener , View.OnLongClickListener {
 
     Cell cell;
+    Context context;
 
     /*public Cell(Context context , int x , int y ){
         super(context);
@@ -36,9 +37,9 @@ public class MinesweeperView extends View implements View.OnClickListener , View
         super(context);
 
         //cell.setPosition(x,y);
+        this.context = context;
 
         MinesweeperModel.getInstance().createGrid(context);
-        this.cell =
 
     }
 
@@ -49,7 +50,7 @@ public class MinesweeperView extends View implements View.OnClickListener , View
 
     @Override
     public void onClick(View v) {
-        MinesweeperModel.getInstance().click(getXPos(), getYPos());
+        MinesweeperModel.getInstance().click(this.context.getXPos(), getYPos());
     }
 
     @Override
@@ -132,6 +133,8 @@ public class MinesweeperView extends View implements View.OnClickListener , View
         drawable.setBounds(0,0,getWidth(),getHeight());
         drawable.draw(canvas);
     }
+
+
 }
 
 
