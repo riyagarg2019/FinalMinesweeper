@@ -2,9 +2,6 @@ package com.example.riyagarg.finalminesweeper.util;
 
 import java.util.Random;
 
-/**
- * Created by riyagarg on 3/16/18.
- */
 
 public class Generate {
 

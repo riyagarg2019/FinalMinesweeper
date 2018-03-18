@@ -15,7 +15,7 @@ import static com.example.riyagarg.finalminesweeper.util.Generate.generate;
 
 public class MinesweeperModel {
 
-    private static MinesweeperModel instance;
+    public static MinesweeperModel instance;
 
     public static final int BOMB_NUMBER = 3;
     public static final int WIDTH = 5;
@@ -51,10 +51,11 @@ public class MinesweeperModel {
         for( int x = 0 ; x < WIDTH ; x++ ){
             for( int y = 0 ; y < HEIGHT ; y++ ){
                 if( MinesweeperGrid[x][y] == null ){
-                    MinesweeperGrid[x][y] = new Cell(x,y);
+                    //MinesweeperGrid[x][y] = new Cell(x,y);
+                    MinesweeperGrid[x][y] = new Cell(context, x,y);
                 }
                 MinesweeperGrid[x][y].setValue(grid[x][y]);
-                MinesweeperGrid[x][y].Refresh();
+                MinesweeperGrid[x][y].refresh();
             }
         }
     }
@@ -108,7 +109,7 @@ public class MinesweeperModel {
         }
 
         if( bombNotFound == 0 && notRevealed == 0 ){
-            Toast.makeText(context,"Game won", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.WIN, Toast.LENGTH_SHORT).show();
         }
         return false;
     }
@@ -116,12 +117,12 @@ public class MinesweeperModel {
     public void flag( int x , int y ){
         boolean isFlagged = getCellAt(x,y).isFlagged();
         getCellAt(x,y).setFlagged(!isFlagged);
-        getCellAt(x,y).Refresh();
+        getCellAt(x,y).refresh();
     }
 
     private void onGameLost(){
         // handle lost game
-        Toast.makeText(context,"Game lost", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, R.string.LOSE, Toast.LENGTH_SHORT).show();
 
         for ( int x = 0 ; x < WIDTH ; x++ ) {
             for (int y = 0; y < HEIGHT; y++) {

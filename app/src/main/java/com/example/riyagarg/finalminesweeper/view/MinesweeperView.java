@@ -15,42 +15,44 @@ import com.example.riyagarg.finalminesweeper.MinesweeperModel;
 import com.example.riyagarg.finalminesweeper.R;
 import com.example.riyagarg.finalminesweeper.view.Cell;
 
-/**
- * Created by riyagarg on 3/16/18.
- */
+
 
 public class MinesweeperView extends View implements View.OnClickListener , View.OnLongClickListener {
 
     Cell cell;
     Context context;
 
-    /*public Cell(Context context , int x , int y ){
-        super(context);
+    public MinesweeperView(Context context, AttributeSet attrs){
+        super(context, attrs);
 
         setPosition(x,y);
 
+        MinesweeperModel.getInstance().createGrid(context);
+
         setOnClickListener(this);
         setOnLongClickListener(this);
-    }*/
+    }
 
-    public MinesweeperView(Context context) {
+    /*public MinesweeperView(Context context) {
         super(context);
 
+        //setPosition(x,y);
         //cell.setPosition(x,y);
         this.context = context;
 
         MinesweeperModel.getInstance().createGrid(context);
 
     }
+    */
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
     public void onClick(View v) {
-        MinesweeperModel.getInstance().click(this.context.getXPos(), getYPos());
+        MinesweeperModel.getInstance().click(getXPos(), getYPos());
     }
 
     @Override
@@ -64,17 +66,22 @@ public class MinesweeperView extends View implements View.OnClickListener , View
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.d("Minesweeper", "Cell::onDraw");
+        //Log.d("Minesweeper", "Cell::onDraw");
         drawButton(canvas);
 
         if (isFlagged()) {
-            drawFlag(canvas);
+            if(getValue() == -1) {
+                drawFlag(canvas);
+            } else {
+                restart();
+            }
         } else if (isRevealed() && isBomb() && !isClicked()) {
             drawNormalBomb(canvas);
         } else {
             if (isClicked()) {
                 if (getValue() == -1) {
                     drawBombExploded(canvas);
+                    restart();
                 } else {
                     drawNumber(canvas);
                 }
@@ -84,7 +91,7 @@ public class MinesweeperView extends View implements View.OnClickListener , View
         }
     }
 
-    public void refresh() {
+    public void Refresh() {
         invalidate();
     }
 

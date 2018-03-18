@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FinalMinesweeper</string>
+    <string name="WIN">Game won</string>
+    <string name="LOSE">Game lost</string>
 </resources>

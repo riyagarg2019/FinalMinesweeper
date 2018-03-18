@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
@@ -33,29 +34,29 @@ public class Cell {
     }*/
 
 
-    /*public Cell(Context context , int x , int y ){
+    public Cell(Context context , int x , int y ){
         //super(context);
 
         this.x = x;
         this.y = y;
 
-        MinesweeperModel.getInstance().createGrid(context);
-        this.view = new MinesweeperView(context);
-
-
-    }*/
-
-    public Cell(int x, int y){
-        //super(context);
-
-        //this.x = x;
-        //this.y = y;
-        setPosition(x,y);
         //MinesweeperModel.getInstance().createGrid(context);
         //this.view = new MinesweeperView(context);
 
 
     }
+
+    /*public Cell(Context context){
+        //super(context);
+
+        //this.x = x;
+        //this.y = y;
+        //setPosition(x,y);
+        //MinesweeperModel.getInstance().createGrid(context);
+        //this.view = new MinesweeperView(context);
+
+
+    }*/
 
     public int getValue() {
         return value;
@@ -89,7 +90,7 @@ public class Cell {
     public void setRevealed() {
         isRevealed = true;
         //invalidate();
-        view.refresh();
+        view.Refresh();
     }
 
     public boolean isClicked() {
@@ -99,7 +100,7 @@ public class Cell {
     public void setClicked() {
         this.isClicked = true;
         this.isRevealed = true;
-        view.refresh();
+        view.Refresh();
         //invalidate();
     }
 
@@ -130,10 +131,14 @@ public class Cell {
         this.position = y * MinesweeperModel.WIDTH + x;
 
         //invalidate();
-        view.refresh();
+        view.Refresh();
     }
-    public void Refresh(){
-        view.refresh();
+    public void refresh(){
+        view.Refresh();
+    }
+
+    public void restart(){
+        MinesweeperModel.instance = null;
     }
 }
 /*public class Cell extends View implements View.OnClickListener , View.OnLongClickListener{
